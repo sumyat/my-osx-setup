@@ -41,19 +41,15 @@
     - gradle
     - maven
     - node
-    - clojure
     - golang
     - kotlin
     - ruby
     - flutter
-    - android
     - office
     - plantuml
     - semgrep
-    - security
     - internet
     - infrastructure-as-code
-    - media
 
   post_tasks:
 

@@ -18,14 +18,6 @@
   community.general.homebrew:
     name: jq
 
-- name: Install yq XML/YAML query procesor
-  ansible.builtin.pip:
-    name: yq
-
-- name: Install XmlStarlet XML toolkit
-  community.general.homebrew:
-    name: xmlstarlet
-
 - name: Install docutils for processing documentation
   ansible.builtin.pip:
     name: docutils
@@ -38,21 +30,9 @@
   community.general.homebrew:
     name: cloc
 
-- name: Install scc code counter
-  community.general.homebrew:
-    name: scc
-
 - name: Install petname command line name generator
   ansible.builtin.pip:
     name: petname
-
-- name: Install core GNU utilities
-  community.general.homebrew:
-    name: coreutils
-
-- name: Install GNU implementation of sed
-  community.general.homebrew:
-    name: gnu-sed
 
 - name: Install tool for working with Architecture Decision Records
   community.general.homebrew:
@@ -106,10 +86,6 @@
       TERM=xterm &&
       if [ "$TMUX" = "" ]; then tmux; fi
 
-- name: Install Midnight Commander command line file manager
-  community.general.homebrew:
-    name: midnight-commander
-
 - name: Install icdiff side-by-side diff tool
   community.general.homebrew:
     name: icdiff
@@ -129,10 +105,6 @@
   community.general.homebrew:
     name: topgrade
 
-- name: Install letsencrypt SSL certificate command line tools
-  community.general.homebrew:
-    name: certbot
-
 - name: Install htop for process monitoring
   community.general.homebrew:
     name: htop
@@ -140,10 +112,6 @@
 - name: Install iftop for network monitoring
   community.general.homebrew:
     name: iftop
-
-- name: Install NCurses Disk Usage utility
-  community.general.homebrew:
-    name: ncdu
 
 - name: Install traceroute for network diagnostics
   community.general.homebrew:

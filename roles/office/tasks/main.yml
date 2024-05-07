@@ -42,14 +42,6 @@
   community.general.homebrew_cask:
     name: alfred
 
-- name: Install Dropbox for online storage
-  community.general.homebrew_cask:
-    name: dropbox
-
-- name: Install mounty for NTFS volumes
-  community.general.homebrew_cask:
-    name: mounty
-
 - name: Install The Unarchiver
   community.general.homebrew_cask:
     name: the-unarchiver
@@ -62,10 +54,6 @@
   community.general.homebrew_cask:
     name: flycut
 
-- name: Install lastpass password manager
-  community.general.homebrew_cask:
-    name: lastpass
-
 - name: Install clocker timezone menu
   community.general.homebrew_cask:
     name: clocker
@@ -77,10 +65,6 @@
 - name: Install Google Drive
   community.general.homebrew_cask:
     name: google-drive
-
-- name: Install Wireshark packet analyzer
-  community.general.homebrew_cask:
-    name: wireshark
 
 - name: Install loom for screen recording
   community.general.homebrew_cask:

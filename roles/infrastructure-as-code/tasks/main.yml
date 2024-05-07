@@ -18,12 +18,6 @@
     name: ansible-lint
     executable: pipx
 
-- name: Install AWS CLI tools
-  ansible.builtin.pip:
-    name: awscli
-    extra_args: --ignore-installed six
-  become: true
-
 - name: Install Vagrant for managing development environments
   community.general.homebrew_cask:
     name: vagrant
@@ -64,10 +58,6 @@
 - name: Install Kuberenetes command line
   community.general.homebrew:
     name: kubernetes-cli
-
-- name: Install Act for testing local GitHub workflows
-  community.general.homebrew:
-    name: act
 
 - name: Install vim plugins
   ansible.builtin.git:

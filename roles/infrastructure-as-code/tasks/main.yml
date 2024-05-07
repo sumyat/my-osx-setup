@@ -1,32 +1,94 @@
-- name: Install Ansible
-  homebrew: name=ansible
+- name: Install Ansible for configuration management
+  ansible.builtin.pip:
+    name: ansible
+    executable: pipx
+    extra_args: --include-deps
+
+- name: Update .zshrc
+  ansible.builtin.blockinfile:
+    create: true
+    path: ~/.zshrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR ANSIBLE"
+    mode: "0644"
+    block: |
+      export PATH="$HOME/Library/Application Support/pipx/venvs/ansible/bin/:$PATH"
+
+- name: Install Ansible linting tool
+  ansible.builtin.pip:
+    name: ansible-lint
+    executable: pipx
 
 - name: Install AWS CLI tools
-  pip: name=awscli extra_args="--ignore-installed six"
-  become: yes
+  ansible.builtin.pip:
+    name: awscli
+    extra_args: --ignore-installed six
+  become: true
 
-- name: Install Vagrant
-  homebrew_cask: name=vagrant
+- name: Install Vagrant for managing development environments
+  community.general.homebrew_cask:
+    name: vagrant
 
-- name: Install Terraform
-  homebrew: name=terraform
+- name: Install Google Cloud SDK
+  community.general.homebrew_cask:
+    name: google-cloud-sdk
 
-- name: Install Packer
-  homebrew: name=packer
+- name: Install Terraform for resource management
+  community.general.homebrew:
+    name: terraform
+
+- name: Install bundler for managing ruby
+  gem:
+    name: bundler
+    executable: ~/.rbenv/shims/gem
+
+- name: Install direnv for environment management
+  community.general.homebrew:
+    name: direnv
+
+- name: Install tflint Terraform linting tool
+  community.general.homebrew:
+    name: tflint
+
+- name: Install terraform-docs for generating Terraform documentation
+  community.general.homebrew:
+    name: terraform-docs
+
+- name: Install Packer for building multiple artifacts from configuration management
+  community.general.homebrew:
+    name: packer
 
 - name: Install templates for Kubernetes manifests
-  homebrew: name=ktmpl
+  community.general.homebrew:
+    name: ktmpl
 
 - name: Install Kuberenetes command line
-  homebrew: name=kubernetes-cli
+  community.general.homebrew:
+    name: kubernetes-cli
 
 - name: Install Act for testing local GitHub workflows
-  homebrew: name=act
+  community.general.homebrew:
+    name: act
 
 - name: Install vim plugins
-  git: repo={{ item.repo }} dest=~/.vim/bundle/{{ item.dest }}
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "~/.vim/bundle/{{ item.dest }}"
   with_items:
     - {repo: "https://github.com/pearofducks/ansible-vim.git", dest: ansible-vim}
     - {repo: "https://github.com/hashivim/vim-terraform.git", dest: vim-terraform}
     - {repo: "https://github.com/rodjek/vim-puppet.git", dest: vim-puppet}
     - {repo: "https://github.com/hashivim/vim-packer.git", dest: vim-packer}
+
+
+- name: Install tap for hashicorp
+  community.general.homebrew_tap:
+    name: hashicorp/tap
+    state: present
+
+- name: Install vault
+  community.general.homebrew:
+    name: hashicorp/tap/vault
+
+- name: Install kustomize
+  community.general.homebrew:
+    name: kustomize

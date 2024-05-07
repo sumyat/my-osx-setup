@@ -1,23 +1,33 @@
 ---
-- hosts: all
+- name: Play for setting up my-osx-setup
+  hosts: all
 
   pre_tasks:
 
+    - name: Get brew path
+      ansible.builtin.command: brew --prefix
+      register: brew_path
+
     - name: Add brew to shell
-      lineinfile: path=~/.zprofile line='eval "$(/opt/homebrew/bin/brew shellenv)"' create=yes
-
-    - name: Install brew versions tap
-      shell: brew tap homebrew/cask-versions
-
-    - name: Add drivers brew tap
-      shell: brew tap homebrew/cask-drivers
+      ansible.builtin.blockinfile:
+        create: true
+        path: ~/.zprofile
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR BREW"
+        mode: "0644"
+        block: |
+          eval "$({{ brew_path.stdout_lines[0] }}/bin/brew shellenv)"
 
     - name: Add /usr/local/sbin to path
-      lineinfile: path=/etc/paths line='/usr/local/sbin' insertbefore='/usr/sbin'
-      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/paths
+        line: '/usr/local/sbin'
+        insertbefore: '/usr/sbin'
+      become: true
 
-    - hostname: name=svo-mac
-      become: yes
+    - name: Update hostname
+      ansible.builtin.hostname:
+        name: "{{ ansible_user_id }}-mac"
+      become: true
 
   roles:
 
@@ -35,9 +45,10 @@
     - golang
     - kotlin
     - ruby
+    - flutter
+    - android
     - office
     - plantuml
-    - atom
     - semgrep
     - security
     - internet
@@ -47,5 +58,8 @@
   post_tasks:
 
     - name: Change .local ownership and permissions
-      file: path=/opt/homebrew/share owner={{ ansible_user_id }} recurse=yes mode='0755'
-      become: yes
+      ansible.builtin.file:
+        path: "{{ brew_path.stdout_lines[0] }}/share owner={{ ansible_user_id }}"
+        recurse: true
+        mode: '0755'
+      become: true

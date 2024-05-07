@@ -1,23 +1,23 @@
 - name: Install tor anonymizing overlay network for TCP
-  homebrew: name=tor
+  community.general.homebrew:
+    name: tor
 
 - name: Install nmap for network discovery and security auditing
-  homebrew: name=nmap
+  community.general.homebrew:
+    name: nmap
 
 - name: Install ncrack network authentication cracking tool
-  homebrew: name=ncrack
+  community.general.homebrew:
+    name: ncrack
 
 - name: Install theHarvester e-mail account and subdomain discovery tool
-  homebrew: name=theharvester
-
-- name: Install OWASP ZAP attack proxy
-  homebrew_cask: name=owasp-zap
+  community.general.homebrew:
+    name: theharvester
 
 - name: Install nikto web server scanner
-  homebrew: name=nikto
+  community.general.homebrew:
+    name: nikto
 
 - name: Install slowhttptest denial of service attack tool
-  homebrew: name=slowhttptest
-
-- name: Install hping packet generator and analyser
-  homebrew: name=hping
+  community.general.homebrew:
+    name: slowhttptest

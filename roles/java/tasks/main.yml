@@ -1,14 +1,21 @@
 - name: Install jenv java environment manager
-  homebrew: name=jenv
+  community.general.homebrew:
+    name: jenv
 
-- name: Add jenv to .zshrc
-  lineinfile: dest=~/.zshrc line='{{ item }}' create=yes
-  with_items:
-    - export PATH="$HOME/.jenv/bin:$PATH"
-    - eval "$(jenv init -)"
+- name: Update .zshrc
+  ansible.builtin.blockinfile:
+    create: true
+    path: ~/.zshrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR JENV"
+    mode: "0644"
+    block: |
+      export PATH="$HOME/.jenv/bin:$PATH"
+      eval "$(jenv init -)"
 
-- name: Install temurin 11
-  homebrew_cask: name=temurin11
+- name: Install current temurin
+  community.general.homebrew_cask:
+    name: temurin
 
-- name: Install temurin 17
-  homebrew_cask: name=temurin17
+- name: Install VisualVM
+  community.general.homebrew_cask:
+    name: visualvm

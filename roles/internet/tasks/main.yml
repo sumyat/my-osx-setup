@@ -1,17 +1,22 @@
-- name: Install franz
-  homebrew_cask: name=franz
+- name: Install franz for aggregating messaging platforms
+  community.general.homebrew_cask:
+    name: franz
 
-- name: Install loom
-  homebrew_cask: name=loom
-
-- name: Install zoom
-  homebrew_cask: name=zoom
+- name: Install zoom for internet telephony
+  community.general.homebrew_cask:
+    name: zoom
 
 - name: Install lynx command line browser
-  homebrew: name=lynx
+  ansible.builtin.command: brew install lynx
 
 - name: Install Chrome browser
-  homebrew_cask: name=google-chrome
+  community.general.homebrew_cask:
+    name: google-chrome
 
 - name: Install Brave browser
-  homebrew_cask: name=brave-browser
+  community.general.homebrew_cask:
+    name: brave-browser
+
+- name: Install Firefox browser
+  community.general.homebrew_cask:
+    name: firefox

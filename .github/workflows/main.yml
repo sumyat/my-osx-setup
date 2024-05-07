@@ -13,15 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Remove existing setup
+      - name: Prepare
         run: |
-          ./uninstall-homebrew.sh
-          sudo rm -rf /Applications/Google\ Chrome.app
+          ./bin/prepare-github.sh
 
       - name: Provision
         run: |
-          ./prepare.sh &&
-          ansible-playbook -i "localhost," -c local playbook.yml
+          ./build.sh
         env:
           ANSIBLE_FORCE_COLOR: '1'
 

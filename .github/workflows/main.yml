@@ -1,6 +1,7 @@
 name: Test
 
 on:
+  workflow_dispatch: {}
   push:
   pull_request:
   schedule:
@@ -22,4 +23,3 @@ jobs:
           ./build.sh
         env:
           ANSIBLE_FORCE_COLOR: '1'
-

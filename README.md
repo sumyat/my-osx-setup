@@ -1,6 +1,6 @@
 # My OSX Setup
 
-[![Continuous integration](https://github.com/arunzone/my-osx-setup/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/arunzone/my-osx-setup/actions/workflows/main.yml)
+[![Continuous integration](https://github.com/sumyat/my-osx-setup/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/sumyat/my-osx-setup/actions/workflows/main.yml)
 
 ## Building
 
